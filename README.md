@@ -31,19 +31,19 @@ Install the dotfiles with either Git or curl:
 
 ### Clone with Git
 
-    git clone https://github.com/webpro/dotfiles.git ~/.dotfiles
-    git clone https://github.com/webpro/extra.git ~/.extra       # Optional, see below
+    git clone https://github.com/patricktruebe/dotfiles.git ~/.dotfiles
+    git clone https://github.com/patricktruebe/extra.git ~/.extra       # Optional, see below
     source ~/.dotfiles/install.sh
 
 ### Remotely install using curl
 
 Alternatively, you can install this into `~/.dotfiles` remotely without Git using curl:
 
-    sh -c "`curl -fsSL https://raw.github.com/webpro/dotfiles/master/remote-install.sh`"
+    sh -c "`curl -fsSL https://raw.github.com/patricktruebe/dotfiles/master/remote-install.sh`"
 
 Or, using wget:
 
-    sh -c "`wget -O - --no-check-certificate https://raw.githubusercontent.com/webpro/dotfiles/master/remote-install.sh`"
+    sh -c "`wget -O - --no-check-certificate https://raw.githubusercontent.com/patricktruebe/dotfiles/master/remote-install.sh`"
 
 ## The `dotfiles` command
 
