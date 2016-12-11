@@ -1,1 +1,1 @@
-pip install git-sweep
+pip install --user git-sweep
