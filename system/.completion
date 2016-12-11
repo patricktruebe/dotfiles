@@ -13,7 +13,7 @@ complete -o default -F _dotfiles_completions dotfiles
 
 # Grunt
 
-is-executable grunt && eval "$(grunt --completion=bash)"
+# is-executable grunt && eval "$(grunt --completion=bash)"
 
 # killall
 
