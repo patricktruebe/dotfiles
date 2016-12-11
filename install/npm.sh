@@ -1,4 +1,9 @@
-brew install nvm
+if is-executable brew ; then
+  brew install nvm
+else
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+fi
+
 . "${DOTFILES_DIR}/system/.nvm"
 nvm install 6
 
