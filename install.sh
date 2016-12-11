@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+set -e
 
 # Get current dir (so run this script from anywhere)
 
 export DOTFILES_DIR EXTRA_DIR
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
 EXTRA_DIR="$HOME/.extra"
 
 # Update dotfiles itself first
@@ -12,6 +13,13 @@ EXTRA_DIR="$HOME/.extra"
 
 # Bunch of symlinks
 
+
+echo -n "Updating bashrc ..."
+if ! grep -q ". $DOTFILES_DIR/runcom/.bash_profile" "$HOME/.bashrc" ; then
+  echo "[ -s $DOTFILES_DIR/runcom/.bash_profile ] && . $DOTFILES_DIR/runcom/.bash_profile" >> "$HOME/.bashrc"
+  echo -n "done"
+fi
+echo
 ln -sfv "$DOTFILES_DIR/runcom/.bash_profile" ~
 ln -sfv "$DOTFILES_DIR/runcom/.inputrc" ~
 ln -sfv "$DOTFILES_DIR/runcom/.gemrc" ~
@@ -20,12 +28,12 @@ ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 
 # Package managers & packages
 
-. "$DOTFILES_DIR/install/brew.sh"
-. "$DOTFILES_DIR/install/bash.sh"
 . "$DOTFILES_DIR/install/npm.sh"
 . "$DOTFILES_DIR/install/pip.sh"
 
 if [ "$(uname)" == "Darwin" ]; then
+  . "$DOTFILES_DIR/install/brew.sh"
+  . "$DOTFILES_DIR/install/bash.sh"
   . "$DOTFILES_DIR/install/brew-cask.sh"
   . "$DOTFILES_DIR/install/gem.sh"
   ln -sfv "$DOTFILES_DIR/etc/mackup/.mackup.cfg" ~
@@ -33,7 +41,8 @@ fi
 
 # Run tests
 
-bats test/*.bats
+source $HOME/.bashrc
+bats $DOTFILES_DIR/test/*.bats
 
 # Install extra stuff
 
