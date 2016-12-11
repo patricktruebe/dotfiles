@@ -28,6 +28,10 @@ ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 
 # Package managers & packages
 
+if [ "$(uname)" == "Linux" -a "$(lsb_release -is)" == "Fedora" ]; then
+  . "$DOTFILES_DIR/install/fedora.sh"
+fi
+
 . "$DOTFILES_DIR/install/npm.sh"
 . "$DOTFILES_DIR/install/pip.sh"
 
