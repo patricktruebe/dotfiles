@@ -34,3 +34,49 @@ set convert-meta off
 # Filtered history search
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+set completion-map-case on
+set print-completions-horizontally on
+set bell-style none
+set show-all-if-unmodified on
+set colored-stats on
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# better history search with Arrow keys: Up/Down
+"^[[5~": history-search-forward
+"^[[6~": history-search-backward
+
+"\e[C": forward-word
+"\e[D": backward-word
+
+# Bash-specific READLINE Tweaks
+# See-Also: http://www.ukuug.org/events/linux2003/papers/bash_tips/
+$if Bash
+
+    # Do history expansion ! when space is pressed
+    Space: magic-space
+
+    # Insert-Option Macro (enhanced to handle multi-word commands)
+    "\eo": "\C-p\C-a\eF\C-f"
+    "\eO": "\eo\eF\C-f"
+
+    # a better backward/forward words by space with Meta-Shift-B/F
+    "\eviB": vi-bWord
+    "\eviW": vi-fWord
+    "\eviE": vi-eWord
+    "\eB": "\eviB"
+    "\eF": "\C-f\eviE\C-f"
+
+    # backward/forward shell words by Meta-Left/Right
+    "\e\e[D": shell-backward-word
+    "\e\e[C": shell-forward-word
+    #  and a kill too
+    "\eH": shell-backward-kill-word
+    "\eD": shell-kill-word
+
+$endif
+
+# Use Alt/Meta + Delete to delete the preceding word
+"\e[3;3~": kill-word
